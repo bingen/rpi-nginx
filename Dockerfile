@@ -1,11 +1,12 @@
-FROM resin/raspberrypi3-debian:latest
+FROM resin/raspberrypi3-debian:stretch
 
 #ENV NGINX_VERSION 1.2.1-2.2+wheezy3
 
 # update and install nginx
 RUN apt-get update && \
-    apt-get install -y nginx
+    apt-get install -y nginx && \
     #=${NGINX_VERSION}
+    apt-get clean
 
 # trim the original configuration for our little raspberry
 RUN sed -i "s/worker_processes 4;/worker_processes 2;/g" /etc/nginx/nginx.conf
